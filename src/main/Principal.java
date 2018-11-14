@@ -2,16 +2,16 @@
 package main;
 
 import controller.campeonController;
-import controller.jugadorController;
+// import controller.jugadorController;
 
 
 public class Principal {
     public static void main(String[] args) {
         
-     jugadorController jc = new jugadorController();
-     jc.crearJugador();
+     // jugadorController jc = new jugadorController();
+     //jc.crearJugador();
      
-     jc.obtenerJugador();
+     //jc.obtenerJugador();
      
      campeonController cc = new campeonController();
      
