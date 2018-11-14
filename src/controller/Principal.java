@@ -1,17 +1,15 @@
 package controller;
 
 
-public class Principal extends javax.swing.JFrame {
+import service.BatallaServiceImpl;
 
+
+public class Principal extends javax.swing.JFrame {
+        
     
     public Principal() {
-        initComponents();
-        CampeonController cc = new CampeonController();
-        cc.crearCampeon();
-        JugadorController jc = new JugadorController();
-        jc.crearJugador();
-        BatallaController bc = new BatallaController();
-        bc.crearBatalla();        
+        initComponents();        
+            
     }
 
     
@@ -102,19 +100,19 @@ public class Principal extends javax.swing.JFrame {
     private void menu_jugadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_jugadorMouseClicked
         JugadorController jcontroller = new JugadorController();
         jcontroller.setVisible(true);
-        this.setVisible(false);
+        //this.setVisible(false);
     }//GEN-LAST:event_menu_jugadorMouseClicked
 
     private void menu_campeonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_campeonesMouseClicked
         CampeonController ccontroller = new CampeonController();
         ccontroller.setVisible(true);
-        this.setVisible(false);
+        //this.setVisible(false);
     }//GEN-LAST:event_menu_campeonesMouseClicked
 
     private void menu_batallasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_batallasMouseClicked
         BatallaController bcontroller = new BatallaController();
         bcontroller.setVisible(true);
-        this.setVisible(false);
+        //this.setVisible(false);
     }//GEN-LAST:event_menu_batallasMouseClicked
 
   
@@ -147,6 +145,9 @@ public class Principal extends javax.swing.JFrame {
         });
     }
 
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

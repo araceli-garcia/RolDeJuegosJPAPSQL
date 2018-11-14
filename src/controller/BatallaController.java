@@ -8,11 +8,9 @@ package controller;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import model.Batalla;
+import service.CampeonServiceImpl;
 import service.BatallaService;
 import service.BatallaServiceImpl;
-import service.CampeonService;
-import service.CampeonServiceImpl;
-import service.JugadorService;
 import service.JugadorServiceImpl;
 
 /**
@@ -20,12 +18,15 @@ import service.JugadorServiceImpl;
  * @author LabInfo01
  */
 public class BatallaController extends javax.swing.JFrame {
-
-    /**
-     * Creates new form BatallaController1
-     */
+    
+    private BatallaService jugadorService = new BatallaServiceImpl();
+    int cantidad;
+    Long j;
+    Long c;
     public BatallaController() {
         initComponents();
+        vacio();
+        PanelAgregar.setVisible(false);
     }
 
     /**
@@ -40,11 +41,23 @@ public class BatallaController extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        PanelAgregar = new javax.swing.JPanel();
+        jLblNombre = new javax.swing.JLabel();
+        btnNuevo = new javax.swing.JButton();
+        TextFieldNombre = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        TextFieldCampeon = new javax.swing.JTextField();
+        TextFieldJugador = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btn_Regresar = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("Ver Batallas");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -57,6 +70,7 @@ public class BatallaController extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, -1, -1));
 
         jButton2.setText("Eliminar");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -64,8 +78,101 @@ public class BatallaController extends javax.swing.JFrame {
                 jButton2MouseClicked(evt);
             }
         });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 89, -1));
 
         jButton3.setText("Editar");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 89, -1));
+
+        jLblNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLblNombre.setText("Cantidad:");
+
+        btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
+
+        TextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextFieldNombreActionPerformed(evt);
+            }
+        });
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Campeon:");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Jugador:");
+
+        javax.swing.GroupLayout PanelAgregarLayout = new javax.swing.GroupLayout(PanelAgregar);
+        PanelAgregar.setLayout(PanelAgregarLayout);
+        PanelAgregarLayout.setHorizontalGroup(
+            PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelAgregarLayout.createSequentialGroup()
+                .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelAgregarLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(btnNuevo)
+                        .addGap(6, 6, 6)
+                        .addComponent(btnGuardar)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnCancelar))
+                    .addGroup(PanelAgregarLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLblNombre)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(30, 30, 30)
+                        .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TextFieldNombre)
+                            .addComponent(TextFieldCampeon, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(TextFieldJugador))))
+                .addGap(88, 88, 88))
+        );
+        PanelAgregarLayout.setVerticalGroup(
+            PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelAgregarLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLblNombre)
+                    .addComponent(TextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(TextFieldCampeon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(TextFieldJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(89, 89, 89)
+                .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNuevo)
+                    .addComponent(btnGuardar)
+                    .addComponent(btnCancelar)))
+        );
+
+        getContentPane().add(PanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 390, 280));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,46 +192,23 @@ public class BatallaController extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 383, 275));
+
         btn_Regresar.setText("Regresar");
         btn_Regresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_RegresarActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_Regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 89, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Regresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_Regresar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(77, Short.MAX_VALUE))
-        );
+        jButton4.setText("Agregar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -134,6 +218,7 @@ public class BatallaController extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        setDefaultCloseOperation(0);
         obtenerBatallas();
 
     }//GEN-LAST:event_jButton1MouseClicked
@@ -143,14 +228,56 @@ public class BatallaController extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
-        Principal principal = new Principal();
-        principal.setVisible(true);
+        setDefaultCloseOperation(0);
         this.dispose();
+       
     }//GEN-LAST:event_btn_RegresarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        eliminarBatalla();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        PanelAgregar.setVisible(true);
+        this.setEnabled(true);
+        OpcionMostrarNoMostrar(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        OpcionMostrarNoMostrar(true);
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void TextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextFieldNombreActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+
+        cantidad = Integer.parseInt(TextFieldNombre.getText());
+        j = Long.parseLong(TextFieldJugador.getText());
+        c = Long.parseLong(TextFieldCampeon.getText());
+        JugadorServiceImpl ju1= new JugadorServiceImpl();
+        CampeonServiceImpl ca1= new CampeonServiceImpl();
+
+        BatallaController jc = new BatallaController();
+        Batalla j1 = new Batalla(cantidad, new Date(),ju1.obtenerRegistro(j),ca1.obtenerRegistro(c));
+        jugadorService.crearRegistro(j1);
+
+        vacio();
+        OpcionMostrarNoMostrar(true);
+        btnNuevo.setEnabled(true);
+        PanelAgregar.setVisible(false);
+        //jc.obtenerBatalla();
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        vacio();
+        PanelAgregar.setVisible(false);
+        btnNuevo.setEnabled(true);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    
     public static void main(String args[]) {
         
         try {
@@ -178,41 +305,36 @@ public class BatallaController extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelAgregar;
+    private javax.swing.JTextField TextFieldCampeon;
+    private javax.swing.JTextField TextFieldJugador;
+    private javax.swing.JTextField TextFieldNombre;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btn_Regresar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLblNombre;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 private BatallaService batallaService = new BatallaServiceImpl();
     
     
-// public Batalla(int cantidad, Date fechaCreacion, Long idJugador, Long idCampeon) 
-    public void crearBatalla(){
-        JugadorServiceImpl ju1= new JugadorServiceImpl();
-        CampeonServiceImpl ca1= new CampeonServiceImpl();
-       Long i=1L;
-     
-        Batalla j1 = new Batalla(9,new Date(),ju1.obtenerRegistro(10L),ca1.obtenerRegistro(11L));
-        //Batalla j2 = new Batalla(9,new Date(),1,7);
-        String nombre =ju1.obtenerRegistro(10L).getNombre();
-        System.out.println("----------"+nombre);
-        
-        String nombreCampeon =ca1.obtenerRegistro(11L).getNombre();
-        System.out.println("////nombre campeon  ///   "+nombreCampeon);
-       // batallaService.crearRegistro(j1);
-        batallaService.crearRegistro(j1);
-    }
-    
+// public Batalla(int cantidad, Date fechaCreacion, Long idBatalla, Long idCampeon) 
+      
     public void actualizarBatalla(){
         
     }
     
     public void eliminarBatalla(){
         int fila = this.jTable1.getSelectedRow();
-        Long id = Long.parseLong(this.jTable1.getModel().getValueAt(fila,0).toString());
-        System.out.println(id);
+        Long id = Long.parseLong(this.jTable1.getModel().getValueAt(fila,0).toString());        
         Batalla j = batallaService.obtenerRegistro(id);
         batallaService.eliminarRegistro(j);
         obtenerBatallas();
@@ -231,5 +353,21 @@ private BatallaService batallaService = new BatallaServiceImpl();
         }
         
     }
+    
+    public void OpcionMostrarNoMostrar(boolean opcion){
+        TextFieldNombre.setEnabled(opcion);
+        TextFieldCampeon.setEnabled(opcion);
+        TextFieldJugador.setEnabled(opcion);
+        btnGuardar.setEnabled(opcion);
+        if(opcion == true){
+            btnNuevo.setEnabled(false);
+        }
+    }
+    
+    public void vacio(){
+        TextFieldNombre.setText("");
+        TextFieldCampeon.setText("");
+        TextFieldJugador.setText("");
+   }
 
 }
