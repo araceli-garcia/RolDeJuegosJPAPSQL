@@ -70,7 +70,7 @@ public class CampeonDaoImpl implements CampeonDao{
     @Override
     public Campeon obtenerRegistro(Long idCampeon) {
         inicializarsesion();
-        Campeon campeon = em.find(Campeon.class, idCampeon); // retorna todo el registro de esa Id
+        Campeon campeon = em.find(Campeon.class, idCampeon); // retorna todo el registro de es Id
         
         cerrarSesion();
         return campeon;

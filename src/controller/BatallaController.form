@@ -31,26 +31,32 @@
                   <Component id="jButton1" max="32767" attributes="0"/>
                   <Component id="jButton2" max="32767" attributes="0"/>
                   <Component id="jButton3" max="32767" attributes="0"/>
+                  <Component id="btn_Regresar" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="31" max="32767" attributes="0"/>
+              <EmptySpace pref="43" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btn_Regresar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="94" max="32767" attributes="0"/>
+              <EmptySpace pref="77" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -58,12 +64,25 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ver Jugadores"/>
+        <Property name="text" type="java.lang.String" value="Ver Batallas"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Eliminar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Editar"/>
+      </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -75,13 +94,25 @@
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="2" rowCount="0">
+              <Table columnCount="4" rowCount="0">
                 <Column editable="true" title="Id" type="java.lang.Integer"/>
-                <Column editable="true" title="Nombre" type="java.lang.String"/>
+                <Column editable="true" title="Cantidad" type="java.lang.String"/>
+                <Column editable="true" title="Jugador" type="java.lang.String"/>
+                <Column editable="true" title="Campeon" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -101,15 +132,13 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btn_Regresar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Eliminar"/>
+        <Property name="text" type="java.lang.String" value="Regresar"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Editar"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_RegresarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

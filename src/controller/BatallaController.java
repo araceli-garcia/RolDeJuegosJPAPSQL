@@ -7,20 +7,24 @@ package controller;
 
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
-import model.Campeon;
+import model.Batalla;
+import service.BatallaService;
+import service.BatallaServiceImpl;
 import service.CampeonService;
 import service.CampeonServiceImpl;
+import service.JugadorService;
+import service.JugadorServiceImpl;
 
 /**
  *
  * @author LabInfo01
  */
-public class CampeonController11 extends javax.swing.JFrame {
+public class BatallaController extends javax.swing.JFrame {
 
     /**
-     * Creates new form CampeonController1
+     * Creates new form BatallaController1
      */
-    public CampeonController11() {
+    public BatallaController() {
         initComponents();
     }
 
@@ -34,14 +38,15 @@ public class CampeonController11 extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btn_Regresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Ver Jugadores");
+        jButton1.setText("Ver Batallas");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -53,16 +58,25 @@ public class CampeonController11 extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Eliminar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+
+        jButton3.setText("Editar");
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Nombre"
+                "Id", "Cantidad", "Jugador", "Campeon"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -71,9 +85,12 @@ public class CampeonController11 extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setText("Eliminar");
-
-        jButton3.setText("Editar");
+        btn_Regresar.setText("Regresar");
+        btn_Regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,22 +103,27 @@ public class CampeonController11 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Regresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(94, Short.MAX_VALUE))
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Regresar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,19 +134,25 @@ public class CampeonController11 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        obtenerCampeones();
+        obtenerBatallas();
 
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
+        Principal principal = new Principal();
+        principal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_RegresarActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -133,62 +161,75 @@ public class CampeonController11 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CampeonController11.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BatallaController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CampeonController11.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BatallaController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CampeonController11.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BatallaController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CampeonController11.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BatallaController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
+  
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CampeonController11().setVisible(true);
+                new BatallaController().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Regresar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-private CampeonService campeonService = new CampeonServiceImpl();
+private BatallaService batallaService = new BatallaServiceImpl();
     
     
-    public void crearCampeon(){
-
+// public Batalla(int cantidad, Date fechaCreacion, Long idJugador, Long idCampeon) 
+    public void crearBatalla(){
+        JugadorServiceImpl ju1= new JugadorServiceImpl();
+        CampeonServiceImpl ca1= new CampeonServiceImpl();
+       Long i=1L;
+     
+        Batalla j1 = new Batalla(9,new Date(),ju1.obtenerRegistro(10L),ca1.obtenerRegistro(11L));
+        //Batalla j2 = new Batalla(9,new Date(),1,7);
+        String nombre =ju1.obtenerRegistro(10L).getNombre();
+        System.out.println("----------"+nombre);
+        
+        String nombreCampeon =ca1.obtenerRegistro(11L).getNombre();
+        System.out.println("////nombre campeon  ///   "+nombreCampeon);
+       // batallaService.crearRegistro(j1);
+        batallaService.crearRegistro(j1);
     }
     
-    public void actualizarCampeon(){
-
+    public void actualizarBatalla(){
+        
     }
     
-    public void eliminarCampeon(){
-
+    public void eliminarBatalla(){
+        int fila = this.jTable1.getSelectedRow();
+        Long id = Long.parseLong(this.jTable1.getModel().getValueAt(fila,0).toString());
+        System.out.println(id);
+        Batalla j = batallaService.obtenerRegistro(id);
+        batallaService.eliminarRegistro(j);
+        obtenerBatallas();
     }
 
-    public void obtenerCampeon(){
-
+    public void obtenerBatalla(){
+        
     }
     
-    public void obtenerCampeones(){
-        for(Campeon j:campeonService.obtenerRegistros()){
-            DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
-            model.addRow(new Object[]{ j.getId(),j.getNombre()});
+    public void obtenerBatallas(){
+       DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        model.setRowCount(0);
+        for(Batalla b:batallaService.obtenerRegistros()){
+            model.addRow(new Object[]{ b.getId(),b.getCantidad(),b.getJugador().getNombre(),b.getCampeon().getNombre()});
+            
         }
+        
     }
 
 }

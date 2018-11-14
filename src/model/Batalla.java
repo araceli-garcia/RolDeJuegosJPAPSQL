@@ -39,24 +39,32 @@ public class Batalla implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEliminacion;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     
     @JoinColumn(name="jugadorId")
     private Jugador jugador;
-    
+   
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="campeonId")
     private Campeon campeon;
+     
+    
     
     
     public Batalla() {
         super();
     }
 
-    public Batalla(int cantidad, Date fachaCracion) {
+    public Batalla(int cantidad, Date fechaCreacion, Jugador jugador, Campeon campeon) {
         this.cantidad = cantidad;
-        this.fechaCreacion = fachaCracion;
+        this.fechaCreacion = fechaCreacion;
+        this.jugador = jugador;
+        this.campeon = campeon;
     }
+
+    
+
+  
     
     public Long getId() {
         return id;
