@@ -1,18 +1,21 @@
 package controller;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
-import model.Jugador;
-import service.JugadorService;
-import service.JugadorServiceImpl;
+import model.Campeon;
+import service.CampeonService;
+import service.CampeonServiceImpl;
 
-public class JugadorController extends javax.swing.JFrame {
-    private JugadorService jugadorService = new JugadorServiceImpl();
+public class CampeonController extends javax.swing.JFrame {
+    private CampeonService campeonService = new CampeonServiceImpl();
     String nombre;
     String sexo;
     int edad;
-    int nivel;
-    public JugadorController() {
+    int tipo;
+    BigDecimal precio;
+    
+    public CampeonController() {
         initComponents();
         vacio();
         PanelAgregar.setVisible(false);
@@ -22,18 +25,20 @@ public class JugadorController extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bt_ver = new javax.swing.JButton();
-        btn_eliminar = new javax.swing.JButton();
-        btn_editar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        Editar = new javax.swing.JButton();
         PanelAgregar = new javax.swing.JPanel();
         jLblNombre = new javax.swing.JLabel();
         btnNuevo = new javax.swing.JButton();
         jLblEdad = new javax.swing.JLabel();
         jLblSexo = new javax.swing.JLabel();
-        jLblNivel = new javax.swing.JLabel();
+        jLblTipo = new javax.swing.JLabel();
         TextFieldNombre = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        TextFieldPrecio = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         cbm_nivel = new javax.swing.JComboBox<>();
         cbm_sexo = new javax.swing.JComboBox<>();
         cbm_edad = new javax.swing.JComboBox<>();
@@ -41,50 +46,40 @@ public class JugadorController extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btn_Regresar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bt_ver.setText("Ver Jugadores");
-        bt_ver.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton1.setText("Ver Campeones");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bt_verMouseClicked(evt);
+                jButton1MouseClicked(evt);
             }
         });
-        bt_ver.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_verActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(bt_ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
 
-        btn_eliminar.setText("Eliminar");
-        btn_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_eliminarMouseClicked(evt);
-            }
-        });
-        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_eliminarActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 101, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 107, -1));
 
-        btn_editar.setText("Editar");
-        btn_editar.addMouseListener(new java.awt.event.MouseAdapter() {
+        Editar.setText("Editar");
+        Editar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_editarMouseClicked(evt);
+                EditarMouseClicked(evt);
             }
         });
-        btn_editar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btn_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 101, -1));
+        getContentPane().add(Editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 107, -1));
 
         jLblNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLblNombre.setText("Nombre:");
@@ -102,8 +97,8 @@ public class JugadorController extends javax.swing.JFrame {
         jLblSexo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLblSexo.setText("Sexo:");
 
-        jLblNivel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLblNivel.setText("Nivel:");
+        jLblTipo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLblTipo.setText("Tipo:");
 
         TextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +119,9 @@ public class JugadorController extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Precio:");
 
         cbm_nivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
         cbm_nivel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -159,72 +157,82 @@ public class JugadorController extends javax.swing.JFrame {
         PanelAgregarLayout.setHorizontalGroup(
             PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelAgregarLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelAgregarLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(btnNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCancelar))
+                        .addGap(139, 139, 139)
+                        .addComponent(jLabel3))
                     .addGroup(PanelAgregarLayout.createSequentialGroup()
-                        .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLblNombre)
-                            .addComponent(jLblEdad, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLblSexo, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLblNivel, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(30, 30, 30)
-                        .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(TextFieldNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cbm_nivel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbm_sexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbm_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(93, Short.MAX_VALUE))
+                        .addGap(51, 51, 51)
+                        .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(PanelAgregarLayout.createSequentialGroup()
+                                .addComponent(btnNuevo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnGuardar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnCancelar))
+                            .addGroup(PanelAgregarLayout.createSequentialGroup()
+                                .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLblNombre)
+                                    .addComponent(jLblEdad, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLblSexo, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLblTipo, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(30, 30, 30)
+                                .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TextFieldPrecio)
+                                    .addComponent(TextFieldNombre)
+                                    .addComponent(cbm_nivel, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbm_sexo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbm_edad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         PanelAgregarLayout.setVerticalGroup(
             PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelAgregarLayout.createSequentialGroup()
+            .addGroup(PanelAgregarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLblNombre)
                     .addComponent(TextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelAgregarLayout.createSequentialGroup()
+                        .addComponent(jLblEdad)
+                        .addGap(23, 23, 23)
+                        .addComponent(jLblSexo)
+                        .addGap(23, 23, 23)
+                        .addComponent(jLblTipo))
+                    .addGroup(PanelAgregarLayout.createSequentialGroup()
+                        .addComponent(cbm_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(cbm_sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(cbm_nivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLblEdad)
-                    .addComponent(cbm_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLblSexo)
-                    .addComponent(cbm_sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLblNivel)
-                    .addComponent(cbm_nivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(TextFieldPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(30, 30, 30)
                 .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar)
                     .addComponent(btnNuevo))
-                .addContainerGap())
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        getContentPane().add(PanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 400, 260));
+        getContentPane().add(PanelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 390, 320));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Nombre", "Edad", "Nivel", "Sexo"
+                "Id", "Nombre", "Edad", "Precio", "Sexo", "Tipo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -232,15 +240,8 @@ public class JugadorController extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-        }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 387, 161));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 377, 275));
 
         btn_Regresar.setText("Regresar");
         btn_Regresar.addActionListener(new java.awt.event.ActionListener() {
@@ -248,51 +249,49 @@ public class JugadorController extends javax.swing.JFrame {
                 btn_RegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_Regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, -1, -1));
+        getContentPane().add(btn_Regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, -1, -1));
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setText("Agregar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, -1, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Jugador");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setText("Campeón");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bt_verActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verActionPerformed
-        
-    }//GEN-LAST:event_bt_verActionPerformed
-
-    private void bt_verMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_verMouseClicked
-        setDefaultCloseOperation(0);
-        obtenerJugadores();
-
-    }//GEN-LAST:event_bt_verMouseClicked
-
-    private void btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_eliminarMouseClicked
-        setDefaultCloseOperation(0);
-        eliminarJugador();
-    }//GEN-LAST:event_btn_eliminarMouseClicked
-
-    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        setDefaultCloseOperation(0);
-    }//GEN-LAST:event_btn_eliminarActionPerformed
+        obtenerCampeones();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
-       setDefaultCloseOperation(0);
-    }//GEN-LAST:event_btn_editarActionPerformed
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        setDefaultCloseOperation(0);      
+        obtenerCampeones();
+
+    }//GEN-LAST:event_jButton1MouseClicked
 
     private void btn_RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegresarActionPerformed
-         this.setVisible(false);
-      
-      
+        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btn_RegresarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        eliminarCampeon();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        setDefaultCloseOperation(0);
+        PanelAgregar.setVisible(true);
+        this.setEnabled(true);
+        OpcionMostrarNoMostrar(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         OpcionMostrarNoMostrar(true);
@@ -307,22 +306,17 @@ public class JugadorController extends javax.swing.JFrame {
         nombre = TextFieldNombre.getText();
         sexo = cbm_sexo.getSelectedItem().toString();
         edad = Integer.parseInt(cbm_edad.getSelectedItem().toString());
-        nivel = Integer.parseInt(cbm_nivel.getSelectedItem().toString());
-        System.out.println("nombre:"+ nombre);
-        System.out.println("edad: "+edad);
-        System.out.println("nivel: "+nivel);
-        System.out.println("sexo:" +sexo);
-
-        JugadorController jc = new JugadorController();
-        Jugador j1 = new Jugador(nombre, edad, sexo, nivel, new Date());
-        jugadorService.crearRegistro(j1);
+        tipo = Integer.parseInt(cbm_nivel.getSelectedItem().toString());
+        CampeonController cc = new CampeonController();
+        Campeon j1 = new Campeon(nombre, edad, sexo, tipo,precio ,new Date());
+        campeonService.crearRegistro(j1);
 
         vacio();
         OpcionMostrarNoMostrar(true);
         btnNuevo.setEnabled(true);
         PanelAgregar.setVisible(false);
-        obtenerJugadores();
-        //jc.obtenerJugador();
+        obtenerCampeones();
+        //cc.obtenerCampeon();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -332,15 +326,8 @@ public class JugadorController extends javax.swing.JFrame {
         btnNuevo.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        setDefaultCloseOperation(0); 
-        PanelAgregar.setVisible(true);
-         this.setEnabled(true);
-         OpcionMostrarNoMostrar(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void cbm_nivelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbm_nivelMouseClicked
-       
+
     }//GEN-LAST:event_cbm_nivelMouseClicked
 
     private void cbm_nivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbm_nivelActionPerformed
@@ -355,104 +342,91 @@ public class JugadorController extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbm_edadActionPerformed
 
-    private void btn_editarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editarMouseClicked
-       actualizarJugador();
-    }//GEN-LAST:event_btn_editarMouseClicked
+    private void EditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditarMouseClicked
+        actualizarCampeon();
+    }//GEN-LAST:event_EditarMouseClicked
 
- 
+  
     public static void main(String args[]) {
        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JugadorController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JugadorController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JugadorController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JugadorController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
        
-
+        
+      
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JugadorController().setVisible(true);
+                new CampeonController().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Editar;
     private javax.swing.JPanel PanelAgregar;
     private javax.swing.JTextField TextFieldNombre;
-    private javax.swing.JButton bt_ver;
+    private javax.swing.JTextField TextFieldPrecio;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btn_Regresar;
-    private javax.swing.JButton btn_editar;
-    private javax.swing.JButton btn_eliminar;
     private javax.swing.JComboBox<String> cbm_edad;
     private javax.swing.JComboBox<String> cbm_nivel;
     private javax.swing.JComboBox<String> cbm_sexo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLblEdad;
-    private javax.swing.JLabel jLblNivel;
     private javax.swing.JLabel jLblNombre;
     private javax.swing.JLabel jLblSexo;
+    private javax.swing.JLabel jLblTipo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
    
-   
-    
-    
-    public void actualizarJugador(){
-        
+    public void actualizarCampeon(){
         int fila = this.jTable1.getSelectedRow();
         Long id = Long.parseLong(this.jTable1.getModel().getValueAt(fila,0).toString());
-        Jugador j = jugadorService.obtenerRegistro(id);
+        Campeon j = campeonService.obtenerRegistro(id);
         j.setNombre(this.jTable1.getModel().getValueAt(fila,1).toString());
         j.setEdad(Integer.parseInt(this.jTable1.getModel().getValueAt(fila,2).toString()));
-        j.setNivel(Integer.parseInt(this.jTable1.getModel().getValueAt(fila,3).toString()));
+        j.setPrecio(BigDecimal.ZERO);
         j.setSexo(this.jTable1.getModel().getValueAt(fila,4).toString());
-        jugadorService.actualizarRegistro(j);
-        obtenerJugadores();
+        j.setTipo(Integer.parseInt(this.jTable1.getModel().getValueAt(fila,5).toString()));
+        campeonService.actualizarRegistro(j);
+        obtenerCampeones();
     }
+
     
-    public void eliminarJugador(){
-        
+    public void eliminarCampeon(){
         int fila = this.jTable1.getSelectedRow();
         Long id = Long.parseLong(this.jTable1.getModel().getValueAt(fila,0).toString());
         System.out.println(id);
-        Jugador j = jugadorService.obtenerRegistro(id);
-        jugadorService.eliminarRegistro(j);
-        obtenerJugadores();
+        Campeon c = campeonService.obtenerRegistro(id);
+        campeonService.eliminarRegistro(c);
+        obtenerCampeones();
     }
 
-    public void obtenerJugador(){
-            
-    }    
-    public void obtenerJugadores(){
+    public void obtenerCampeon(){
+
+    }
+    
+    public void obtenerCampeones(){
+         
         DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
         model.setRowCount(0);
-        for(Jugador j:jugadorService.obtenerRegistros()){
-            model.addRow(new Object[]{ j.getId(),j.getNombre(),j.getEdad(),j.getNivel(),j.getSexo()});
-        }
+        for(Campeon j:campeonService.obtenerRegistros()){
+            model.addRow(new Object[]{ j.getId(),j.getNombre(),j.getEdad(),j.getPrecio(),j.getSexo(),j.getTipo()});
     }
-
+    }
+    
     public void OpcionMostrarNoMostrar(boolean opcion){
         TextFieldNombre.setEnabled(opcion);
         cbm_edad.setEnabled(opcion);
         cbm_nivel.setEnabled(opcion);
-        cbm_sexo.setEnabled(opcion);      
+        cbm_sexo.setEnabled(opcion);
+        TextFieldPrecio.setEnabled(opcion);
         btnGuardar.setEnabled(opcion);
         if(opcion == true){
             btnNuevo.setEnabled(false);
@@ -460,7 +434,7 @@ public class JugadorController extends javax.swing.JFrame {
     }
     
     public void vacio(){
-        TextFieldNombre.setText("");
-        
+        TextFieldNombre.setText("");       
+        TextFieldPrecio.setText("");
     }
 }

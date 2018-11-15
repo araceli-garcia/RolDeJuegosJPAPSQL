@@ -61,7 +61,7 @@ public class JugadorDaoImpl implements JugadorDao{
         cerrarSesion();
         return jugador;
     }
-
+    
     @Override
     public void eliminarRegistro(Jugador jugador) {
         inicializarsesion();
